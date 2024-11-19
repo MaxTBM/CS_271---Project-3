@@ -17,7 +17,7 @@ template <class K, class V>
 class HashMap
 {
     private:
-
+        
     public:
 						    HashMap		                    (void);
 						    HashMap		                    (const HashMap<K, V> &map);

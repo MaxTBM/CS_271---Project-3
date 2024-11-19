@@ -22,6 +22,7 @@ class Set
 						        Set		                (T size);
 						        Set		                (const Set<T> &set);
 						        ~Set		            (void);
+                                
 		Set<T>*                 operator=	            (const Set<T> &set);
 
         void                    insert                  (const T &value);

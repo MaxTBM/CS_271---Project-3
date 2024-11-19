@@ -22,11 +22,12 @@ class HashMapTree
 						        HashMapTree		                (void);
 						        HashMapTree		                (const HashMapTree<K, V> &map);
 						        ~HashMapTree		            (void);
+
 		HashMapTree<K, V>*      operator=	                    (const HashMapTree<K, V> &map);
+        V&                      operator[]                      (const K &key);
 
         void                    insert                          (const K &key, const V &value);
         void                    remove                          (const K &key);
-        V&                      operator[]                      (const K &key);
         pair<K, V>*             search                          (const K &key);
 };
 

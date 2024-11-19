@@ -27,16 +27,17 @@ class HashMap
 
         long members_size; // Size of the hash map (number of slots)
         long elements; // Number of key-value pairs in the map
-        Slot *map; // Dynamic array of slots (buckets)
-        long hash(const K &key) const; // Hash function to compute the bucket index
+        Slot *map; // Dynamic array of slots
+        long hash(const K &key) const; // Hash function to compute the slot index
 
+        
 
     public:
 						    HashMap		                    (long size = 20);
-						    HashMap		                    (const HashMap<K, V> &map);
+						    HashMap		                    (const HashMap<K, V> &other);
 						    ~HashMap		                (void);
 
-		HashMap<K, V>*		operator=	                    (const HashMap<K, V> &map);
+		HashMap<K, V>*		operator=	                    (const HashMap<K, V> &other);
         V&                  operator[]                      (const K &key);
 
         void                insert                          (const K &key, const V &value);

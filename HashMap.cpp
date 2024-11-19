@@ -29,3 +29,15 @@ HashMap<K, V>::HashMap(long size)
         map[i].chain = DoublyLinkedList<V>();
     }
 }
+
+/*===========================================================================
+Default copy constructor
+Copy a hashmap to a new hashmap both with type K keys and type T values
+Parameters: A hashmap
+Return: None
+===========================================================================*/
+template <class K, class V>
+HashMap<K, V>::HashMap(const HashMap<K, V> &other)
+{
+    
+}

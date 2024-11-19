@@ -20,10 +20,10 @@ class HashMapTree
 
     public:
 						        HashMapTree		                (void);
-						        HashMapTree		                (const HashMapTree<K, V> &map);
+						        HashMapTree		                (const HashMapTree<K, V> &other);
 						        ~HashMapTree		            (void);
 
-		HashMapTree<K, V>*      operator=	                    (const HashMapTree<K, V> &map);
+		HashMapTree<K, V>*      operator=	                    (const HashMapTree<K, V> &other);
         V&                      operator[]                      (const K &key);
 
         void                    insert                          (const K &key, const V &value);

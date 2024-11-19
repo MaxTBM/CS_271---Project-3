@@ -28,7 +28,10 @@ class HashMap
         long members_size; // Size of the hash map (number of slots)
         long elements; // Number of key-value pairs in the map
         Slot *map; // Dynamic array of slots
-        long hash(const K &key) const; // Hash function to compute the slot index
+        // Hash function to compute the slot index
+        long                hash                            (const K &key) const;
+        // Helper function for copy constructor and assignment
+        void                copy                            (const HashMap<K, V> &other);
 
         
 

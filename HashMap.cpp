@@ -39,5 +39,34 @@ Return: None
 template <class K, class V>
 HashMap<K, V>::HashMap(const HashMap<K, V> &other)
 {
-    
+    copy(other);
+}
+
+/*===========================================================================
+Assignment operator
+Overloading the = operator to assign a binary search tree node, functions
+similar to the copy constructor
+Parameters: A binary search tree node with value of type T
+Return: A copied binary search tree node with value of type T
+===========================================================================*/
+
+
+
+/*===========================================================================
+The copy helper function
+Copy a hashmap to a new hashmap both with type K keys and type T values
+Parameters: A hashmap
+Return: None
+===========================================================================*/
+template <class K, class V>
+void HashMap<K, V>::copy(const HashMap<K, V> &other)
+{
+    members_size = other.members_size;
+    elements = other.elements;
+
+    map = new Slot[members_size];
+    for (int i = 0; i < members_size; ++i) {
+        map[i].key = other.map[i].key;
+        map[i].chain = other.map[i].chain;
+    }
 }

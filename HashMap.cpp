@@ -25,7 +25,8 @@ HashMap<K, V>::HashMap(long size)
     elements = 0;
     map = new Slot[members_size];
 
-    for (int i = 0; i < members_size; ++i) {
+    for (int i = 0; i < members_size; ++i)
+    {
         map[i].chain = DoublyLinkedList<V>();
     }
 }
@@ -43,14 +44,33 @@ HashMap<K, V>::HashMap(const HashMap<K, V> &other)
 }
 
 /*===========================================================================
+Default destructor
+Parameters: None
+Return: None
+===========================================================================*/
+template <class K, class V>
+HashMap<K, V>::~HashMap()
+{
+    delete[] map;
+}
+
+/*===========================================================================
 Assignment operator
 Overloading the = operator to assign a binary search tree node, functions
 similar to the copy constructor
 Parameters: A binary search tree node with value of type T
 Return: A copied binary search tree node with value of type T
 ===========================================================================*/
-
-
+template <class K, class V>
+HashMap<K, V> *HashMap<K, V>::operator=(const HashMap<K, V> &other)
+{
+    if (this != &other)
+    {
+        delete[] map;
+        copy(other);
+    }
+    return *this;
+}
 
 /*===========================================================================
 The copy helper function
@@ -65,8 +85,10 @@ void HashMap<K, V>::copy(const HashMap<K, V> &other)
     elements = other.elements;
 
     map = new Slot[members_size];
-    for (int i = 0; i < members_size; ++i) {
+    for (int i = 0; i < members_size; ++i)
+    {
         map[i].key = other.map[i].key;
         map[i].chain = other.map[i].chain;
     }
 }
+

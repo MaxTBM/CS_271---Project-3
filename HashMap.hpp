@@ -21,9 +21,9 @@ class HashMap
         // Dynamic array of vectors
         vector<pair<K, V>>* map;
         // Size of the hash map (number of slots) 
-        long slots;
+        long                slots;
         // Number of key-value pairs in the map
-        long elements;
+        long                elements;
 
         // Helper function for copy constructor and assignment
         void                copy                            (const HashMap<K, V> &other);        

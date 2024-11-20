@@ -21,7 +21,7 @@ Parameters: number of keys
 Return: None
 ===========================================================================*/
 template <class K, class V>
-HashMap<K, V>::HashMap(long size = 20)
+HashMap<K, V>::HashMap(long size)
 {
     slots = size;
     elements = 0;

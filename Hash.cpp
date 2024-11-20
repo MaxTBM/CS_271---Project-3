@@ -20,7 +20,7 @@ Parameters: number of keys
 Return: None
 ===========================================================================*/
 template <class K>
-Hash<K>::Hash(long num_slots = 20) 
+Hash<K>::Hash(long num_slots) 
 {
     slots = num_slots;
 }

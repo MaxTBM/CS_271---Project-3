@@ -60,7 +60,7 @@ Parameters: A binary search tree node with value of type T
 Return: A copied binary search tree node with value of type T
 ===========================================================================*/
 template <class K, class V>
-HashMap<K, V> *HashMap<K, V>::operator=(const HashMap<K, V> &other)
+HashMap<K, V>* HashMap<K, V>::operator=(const HashMap<K, V> &other)
 {
     if (this != &other)
     {
@@ -105,7 +105,8 @@ void HashMap<K, V>::insert(const K &key, const V &value)
     long index = hash_func.func(key);
     for (auto &pair : map[index])
     {
-        if (pair.first == key)  // If the key already exists
+        // If the key already exists
+        if (pair.first == key)
         {
             pair.second = value;
             return;
@@ -115,6 +116,30 @@ void HashMap<K, V>::insert(const K &key, const V &value)
     // If the key doesn't exist, insert the new key-value pair
     map[index].push_back(make_pair(key, value));
     elements++;
+}
+
+/*===========================================================================
+search() function
+Search for a pair key-value using a key. If the pair doesn't exist, return
+null pointer
+Parameters: key of type K
+Return: Pointer to the key-value pair or null pointer
+===========================================================================*/
+template <class K, class V>
+pair<K, V>* HashMap<K, V>::search(const K &key)
+{
+    long index = hash_func.func(key);
+    for (auto &pair : map[index])
+    {
+        // If the key is found
+        if (pair.first == key)
+        {
+            return &pair;
+        }
+    }
+
+    // If the key is not found, return nullptr
+    return nullptr;
 }
 
 /*===========================================================================

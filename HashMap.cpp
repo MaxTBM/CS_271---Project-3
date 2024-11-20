@@ -22,11 +22,11 @@ Parameters: number of keys
 Return: None
 ===========================================================================*/
 template <class K, class V>
-HashMap<K, V>::HashMap(long size)
+HashMap<K, V>::HashMap(long size = 20)
 {
     slots = size;
     elements = 0;
-    hash_func(slots);
+    hash_func = Hash<K>(slots);
     map = new vector<pair<K, V>>[slots];
 }
 
@@ -140,6 +140,31 @@ pair<K, V>* HashMap<K, V>::search(const K &key)
 
     // If the key is not found, return nullptr
     return nullptr;
+}
+
+/*===========================================================================
+remove() function
+Takes a pointer to the element to be removed and removes it from the data
+structure.
+Parameters: Pointer to pair to be removed
+Return: None
+===========================================================================*/
+template <class K, class V>
+void HashMap<K, V>::remove(pair<K, V>* remove_pair)
+{
+    long index = hash_func.func(remove_pair->first);
+
+    // Iterate through the vector at the calculated index
+    for (auto i = map[index].begin(); i != map[index].end(); i++)
+    {
+        // Find the key-value pair to remove
+        if (&(*i) == remove_pair)
+        {
+            map[index].erase(i);  // Remove the element from the vector
+            elements--;
+            return;
+        }
+    }
 }
 
 /*===========================================================================

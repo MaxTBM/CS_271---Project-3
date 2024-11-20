@@ -30,7 +30,4 @@ class Hash
         long        func                            (const K& key) const;
 };
 
-
-#include "Hash.cpp"
-
 #endif

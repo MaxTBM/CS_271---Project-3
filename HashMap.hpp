@@ -43,11 +43,8 @@ class HashMap
         V&                  operator[]                      (const K &key);
 
         void                insert                          (const K &key, const V &value);
-        void                remove                          (const K &key);
+        void                remove                          (pair<K, V>* remove_pair);
         pair<K, V>*         search                          (const K &key);
 };
-
-
-#include "HashMap.cpp"
 
 #endif

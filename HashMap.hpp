@@ -7,8 +7,7 @@ This file contains the definitions of a hash map class.
 
 #include <iostream>
 #include <utility>
-#include "DoublyLinkedList.hpp"
-#include "DoublyLinkedList.cpp"
+#include <vector>
 
 using namespace std;
 
@@ -19,21 +18,15 @@ template <class K, class V>
 class HashMap
 {
     private:
-        struct Slot
-        {
-            K key;
-            DoublyLinkedList<V> chain; // Doubly linked list to store values for the key
-        }
+        // Dynamic array of vectors
+        vector<pair<K, V>>* map;
+        // Size of the hash map (number of slots) 
+        long slots;
+        // Number of key-value pairs in the map
+        long elements;
 
-        long members_size; // Size of the hash map (number of slots)
-        long elements; // Number of key-value pairs in the map
-        Slot *map; // Dynamic array of slots
-        // Hash function to compute the slot index
-        long                hash                            (const K &key) const;
         // Helper function for copy constructor and assignment
-        void                copy                            (const HashMap<K, V> &other);
-
-        
+        void                copy                            (const HashMap<K, V> &other);        
 
     public:
 						    HashMap		                    (long size = 20); // Assume the map has 20 keys if no input in provided

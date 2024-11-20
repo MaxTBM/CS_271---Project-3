@@ -7,6 +7,7 @@ This file contains the implementations of a hash map class functions.
 
 #include <iostream>
 #include <utility>
+#include <vector>
 #include "HashMap.hpp"
 #include "customexceptions.hpp"
 
@@ -21,14 +22,9 @@ Return: None
 template <class K, class V>
 HashMap<K, V>::HashMap(long size)
 {
-    members_size = size;
+    slots = size;
     elements = 0;
-    map = new Slot[members_size];
-
-    for (int i = 0; i < members_size; ++i)
-    {
-        map[i].chain = DoublyLinkedList<V>();
-    }
+    map = new vector<pair<K, V>>[slots];
 }
 
 /*===========================================================================
@@ -81,14 +77,13 @@ Return: None
 template <class K, class V>
 void HashMap<K, V>::copy(const HashMap<K, V> &other)
 {
-    members_size = other.members_size;
+    slots = other.slots;
     elements = other.elements;
 
-    map = new Slot[members_size];
-    for (int i = 0; i < members_size; ++i)
+    map = new vector<pair<K, V>>[slots];
+    for (long i = 0; i < slots; i++)
     {
-        map[i].key = other.map[i].key;
-        map[i].chain = other.map[i].chain;
+        map[i] = other.map[i];
     }
 }
 

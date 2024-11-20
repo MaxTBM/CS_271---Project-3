@@ -13,16 +13,19 @@ using namespace std;
 #ifndef CUSTOMEXCEPTIONS_HPP
 #define CUSTOMEXCEPTIONS_HPP
 
-class KeyException : public exception {
-private:
-    string message;
-
+class KeyNotFoundException : public std::exception
+{
 public:
-    explicit KeyException(const string &msg) : message(msg) {}
+    explicit KeyNotFoundException(const std::string &key)
+        : key(key) {}
 
-    const char* what() const noexcept override {
-        return message.c_str();
+    const char *what() const noexcept override
+    {
+        return ("Key not found: " + key).c_str();
     }
+
+private:
+    std::string key;
 };
 
 #endif

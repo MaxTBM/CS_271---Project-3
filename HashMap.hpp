@@ -2,7 +2,8 @@
 Hoa Nguyen, Nguyen Nguyen, Amaya Joshi
 18 November 2024
 HashMap.hpp
-This file contains the definitions of a hash map class.
+This file contains the definitions of a hash map class. Using vector to handle
+chaining.
 ===========================================================================*/
 
 #include <iostream>

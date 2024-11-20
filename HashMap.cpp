@@ -8,6 +8,8 @@ This file contains the implementations of a hash map class functions.
 #include <iostream>
 #include <utility>
 #include <vector>
+#include "Hash.hpp"
+#include "Hash.cpp"
 #include "HashMap.hpp"
 #include "customexceptions.hpp"
 
@@ -67,6 +69,27 @@ HashMap<K, V> *HashMap<K, V>::operator=(const HashMap<K, V> &other)
         copy(other);
     }
     return *this;
+}
+
+/*===========================================================================
+Overloading the [] operator
+Parameters: key of type K
+Return: reference to the value associated with the key (of type V)
+===========================================================================*/
+template <class K, class V>
+V& HashMap<K, V>::operator[](const K &key)
+{
+    long index = hash_func.func(key);
+
+    for (auto &pair : map[index])
+    {
+        if (pair.first == key)
+        {
+            return pair.second;
+        }
+    }
+
+    throw KeyNotFoundException(to_string(key));
 }
 
 /*===========================================================================

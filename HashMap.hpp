@@ -10,7 +10,6 @@ chaining.
 #include <utility>
 #include <vector>
 #include "Hash.hpp"
-#include "Hash.cpp"
 
 using namespace std;
 

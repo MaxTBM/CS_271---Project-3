@@ -9,7 +9,6 @@ This file contains the implementations of a hash map class functions.
 #include <utility>
 #include <vector>
 #include "Hash.hpp"
-#include "Hash.cpp"
 #include "HashMap.hpp"
 #include "customexceptions.hpp"
 
@@ -54,10 +53,9 @@ HashMap<K, V>::~HashMap()
 }
 
 /*===========================================================================
-Overloading the = operator to assign a binary search tree node, functions
-similar to the copy constructor
-Parameters: A binary search tree node with value of type T
-Return: A copied binary search tree node with value of type T
+Overloading the = operator
+Parameters: A hashmap of keys type K and values type T
+Return: A copied hashmap of keys type K and values type T
 ===========================================================================*/
 template <class K, class V>
 HashMap<K, V>* HashMap<K, V>::operator=(const HashMap<K, V> &other)

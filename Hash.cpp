@@ -20,7 +20,7 @@ Parameters: number of keys
 Return: None
 ===========================================================================*/
 template <class K>
-Hash<K>::Hash(long num_slots) 
+Hash<K>::Hash(long num_slots = 20) 
 {
     slots = num_slots;
 }
@@ -45,6 +45,21 @@ template <class K>
 Hash<K>::~Hash()
 {
 
+}
+
+/*===========================================================================
+Overloading the = operator to assign a binary search tree node, functions
+similar to the copy constructor
+Parameters: A binary search tree node with value of type T
+Return: A copied binary search tree node with value of type T
+===========================================================================*/
+template <class K>
+Hash<K>& Hash<K>::operator=(const Hash<K>& other)
+{
+    if (this != &other) {
+        slots = other.slots;
+    }
+    return *this;
 }
 
 /*===========================================================================

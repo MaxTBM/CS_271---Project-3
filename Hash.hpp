@@ -23,9 +23,11 @@ class Hash
         // Size of the hash map (number of slots) 
         long        slots;
     public:
-        			Hash		                    (long num_slots);
+        			Hash		                    (long num_slots = 20);
 					Hash                            (const Hash<K>& other);
 					~Hash		                    (void);
+
+        Hash<K>&    operator=                       (const Hash<K>& other);
                     
         long        func                            (const K& key) const;
 };

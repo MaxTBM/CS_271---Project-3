@@ -68,7 +68,7 @@ Parameters: The key to hash
 Return: The hash index for the key of long type
 ===========================================================================*/
 template <class K>
-long Hash<K>::func(const K& key) const
+long Hash<K>::getHash(K key)
 {
     return floor(slots * ((key * A) - floor(key * A)));
 }

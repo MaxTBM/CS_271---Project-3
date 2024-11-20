@@ -76,7 +76,7 @@ Return: reference to the value associated with the key (of type V)
 template <class K, class V>
 V& HashMap<K, V>::operator[](const K &key)
 {
-    long index = hash_func.func(key);
+    long index = hash_func.getHash(key);
 
     for (auto &pair : map[index])
     {
@@ -100,7 +100,7 @@ Return: None
 template <class K, class V>
 void HashMap<K, V>::insert(const K &key, const V &value)
 {
-    long index = hash_func.func(key);
+    long index = hash_func.getHash(key);
     for (auto &pair : map[index])
     {
         // If the key already exists
@@ -126,7 +126,7 @@ Return: Pointer to the key-value pair or null pointer
 template <class K, class V>
 pair<K, V>* HashMap<K, V>::search(const K &key)
 {
-    long index = hash_func.func(key);
+    long index = hash_func.getHash(key);
     for (auto &pair : map[index])
     {
         // If the key is found
@@ -150,7 +150,7 @@ Return: None
 template <class K, class V>
 void HashMap<K, V>::remove(pair<K, V>* remove_pair)
 {
-    long index = hash_func.func(remove_pair->first);
+    long index = hash_func.getHash(remove_pair->first);
 
     // Iterate through the vector at the calculated index
     for (auto i = map[index].begin(); i != map[index].end(); i++)
@@ -176,7 +176,8 @@ void HashMap<K, V>::copy(const HashMap<K, V> &other)
 {
     slots = other.slots;
     elements = other.elements;
-    hash_func(slots);
+    hash_func = Hash<K>(slots);
+
 
     map = new vector<pair<K, V>>[slots];
     for (long i = 0; i < slots; i++)

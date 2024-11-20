@@ -16,7 +16,7 @@ using namespace std;
 
 const double A = 0.69;
 
-template <class K> 
+template <class K>  
 class Hash
 {
     private:
@@ -29,7 +29,7 @@ class Hash
 
         Hash<K>&    operator=                       (const Hash<K>& other);
                     
-        long        func                            (const K& key) const;
+        long        getHash                         (K key);
 };
 
 #endif

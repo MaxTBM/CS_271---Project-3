@@ -24,6 +24,7 @@ HashMap<K, V>::HashMap(long size)
 {
     slots = size;
     elements = 0;
+    hash_func(slots);
     map = new vector<pair<K, V>>[slots];
 }
 
@@ -79,6 +80,7 @@ void HashMap<K, V>::copy(const HashMap<K, V> &other)
 {
     slots = other.slots;
     elements = other.elements;
+    hash_func(slots);
 
     map = new vector<pair<K, V>>[slots];
     for (long i = 0; i < slots; i++)

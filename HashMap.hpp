@@ -8,6 +8,8 @@ This file contains the definitions of a hash map class.
 #include <iostream>
 #include <utility>
 #include <vector>
+#include "Hash.hpp"
+#include "Hash.cpp"
 
 using namespace std;
 
@@ -24,6 +26,9 @@ class HashMap
         long                slots;
         // Number of key-value pairs in the map
         long                elements;
+        
+        // Hash function instance
+        Hash<K>             hash_func;
 
         // Helper function for copy constructor and assignment
         void                copy                            (const HashMap<K, V> &other);        

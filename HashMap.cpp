@@ -54,7 +54,6 @@ HashMap<K, V>::~HashMap()
 }
 
 /*===========================================================================
-Assignment operator
 Overloading the = operator to assign a binary search tree node, functions
 similar to the copy constructor
 Parameters: A binary search tree node with value of type T
@@ -90,6 +89,32 @@ V& HashMap<K, V>::operator[](const K &key)
     }
 
     throw KeyNotFoundException(to_string(key));
+}
+
+/*===========================================================================
+insert() function
+Inserts a value using a key to do the hash computation 
+and to do any comparisons. If a value with the same key is already present, 
+it gets overwritten.
+Parameters: key of type K, value of type T 
+Return: None
+===========================================================================*/
+template <class K, class V>
+void HashMap<K, V>::insert(const K &key, const V &value)
+{
+    long index = hash_func.func(key);
+    for (auto &pair : map[index])
+    {
+        if (pair.first == key)  // If the key already exists
+        {
+            pair.second = value;
+            return;
+        }
+    }
+
+    // If the key doesn't exist, insert the new key-value pair
+    map[index].push_back(make_pair(key, value));
+    elements++;
 }
 
 /*===========================================================================

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int main() {
+int main1() {
     // Create a HashMap of string keys and integer values
     HashMap<string, int> map;
 
@@ -53,3 +53,9 @@ int main() {
 
     return 0;
 }
+
+int main()
+{
+    HashMap<int, int> map;
+    map.insert(1,1);
+};

@@ -94,7 +94,9 @@ V& HashMap<K, V>::operator[](const K &key)
     }
     else
     {
-        throw KeyNotFoundException(to_string(key));
+        ostringstream oss;
+        oss << key;
+        throw KeyNotFoundException(oss.str());
     }
 }
 

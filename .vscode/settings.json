@@ -1,5 +1,9 @@
 {
     "files.associations": {
-        "utility": "cpp"
+        "utility": "cpp",
+        "xtr1common": "cpp",
+        "xstring": "cpp",
+        "iosfwd": "cpp",
+        "string": "cpp"
     }
 }

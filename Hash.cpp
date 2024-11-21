@@ -7,6 +7,7 @@ The function is the multiplication method
 ===========================================================================*/
 
 #include <iostream>
+#include <sstream>
 #include <utility>
 #include <vector>
 #include <cmath>
@@ -74,7 +75,7 @@ long Hash<K>::getHash(K key)
 {
     long k = 0;
     string key_s;
-    
+
     // Check if the key is a string
     if (is_same<K, string>::value)
     {
@@ -82,7 +83,9 @@ long Hash<K>::getHash(K key)
     }
     else
     {
-        key_s = to_string(key);
+        ostringstream oss;
+        oss << key;
+        key_s = oss.str();
     }
 
     // Add ASCII values of characters in the string

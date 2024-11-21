@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "HashMap.hpp"
+#include "HashMap.cpp"
 #include "customexceptions.hpp"
 
 using namespace std;

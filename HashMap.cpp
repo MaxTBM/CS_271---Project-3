@@ -8,7 +8,8 @@ This file contains the implementations of a hash map class functions.
 #include <iostream>
 #include <utility>
 #include <vector>
-#include "Hash.hpp"
+#include <string>
+#include <type_traits>
 #include "HashMap.hpp"
 #include "customexceptions.hpp"
 
@@ -86,7 +87,15 @@ V& HashMap<K, V>::operator[](const K &key)
         }
     }
 
-    throw KeyNotFoundException(to_string(key));
+    // Check if the key is a string
+    if (is_same<K, string>::value)
+    {
+        throw KeyNotFoundException(key);
+    }
+    else
+    {
+        throw KeyNotFoundException(to_string(key));
+    }
 }
 
 /*===========================================================================

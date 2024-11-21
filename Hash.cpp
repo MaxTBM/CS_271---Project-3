@@ -10,6 +10,8 @@ The function is the multiplication method
 #include <utility>
 #include <vector>
 #include <cmath>
+#include <string>
+#include <type_traits>
 #include "Hash.hpp"
 
 using namespace std;
@@ -20,7 +22,7 @@ Parameters: number of keys
 Return: None
 ===========================================================================*/
 template <class K>
-Hash<K>::Hash(long num_slots) 
+Hash<K>::Hash(long num_slots)
 {
     slots = num_slots;
 }
@@ -31,7 +33,7 @@ Parameters: A hash
 Return: None
 ===========================================================================*/
 template <class K>
-Hash<K>::Hash(const Hash<K>& other)
+Hash<K>::Hash(const Hash<K> &other)
 {
     slots = other.slots;
 }
@@ -44,7 +46,6 @@ Return: None
 template <class K>
 Hash<K>::~Hash()
 {
-
 }
 
 /*===========================================================================
@@ -54,9 +55,10 @@ Parameters: A binary search tree node with value of type T
 Return: A copied binary search tree node with value of type T
 ===========================================================================*/
 template <class K>
-Hash<K>& Hash<K>::operator=(const Hash<K>& other)
+Hash<K> &Hash<K>::operator=(const Hash<K> &other)
 {
-    if (this != &other) {
+    if (this != &other)
+    {
         slots = other.slots;
     }
     return *this;
@@ -70,5 +72,23 @@ Return: The hash index for the key of long type
 template <class K>
 long Hash<K>::getHash(K key)
 {
-    return floor(slots * ((key * A) - floor(key * A)));
+    long k = 0;
+    string key_s;
+    
+    // Check if the key is a string
+    if (is_same<K, string>::value)
+    {
+        key_s = key;
+    }
+    else
+    {
+        key_s = to_string(key);
+    }
+
+    // Add ASCII values of characters in the string
+    for (int i = 0; i < key_s.length(); i++) {
+        k += int(key_s[i]);
+    }
+
+    return floor(slots * ((k * A) - floor(k * A)));
 }

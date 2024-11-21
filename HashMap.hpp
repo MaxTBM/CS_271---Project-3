@@ -9,12 +9,14 @@ chaining.
 #include <iostream>
 #include <utility>
 #include <vector>
-#include "Hash.hpp"
+
 
 using namespace std;
 
 #ifndef HASHMAP_HPP
 #define HASHMAP_HPP
+
+#include "Hash.cpp"
 
 template <class K, class V> 
 class HashMap

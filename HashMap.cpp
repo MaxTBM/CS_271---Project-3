@@ -98,7 +98,7 @@ V& HashMap<K, V>::operator[](const K &key)
         oss << key;
         throw KeyNotFoundException(oss.str());
     }
-}
+};
 
 /*===========================================================================
 insert() function

@@ -13,17 +13,20 @@ using namespace std;
 #ifndef SET_HPP
 #define SET_HPP
 
+#include "HashMap.hpp"
+
 template <class T> 
 class Set
 {
     private:
+    
 
     public:
-						        Set		                (T size);
-						        Set		                (const Set<T> &set);
+						        Set		                (long size = 20);
+						        Set		                (const Set<T> &other);
 						        ~Set		            (void);
                                 
-		Set<T>*                 operator=	            (const Set<T> &set);
+		Set<T>*                 operator=	            (const Set<T> &other);
 
         void                    insert                  (const T &value);
         void                    remove                  (const T &value);

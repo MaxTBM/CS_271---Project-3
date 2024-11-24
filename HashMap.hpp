@@ -40,7 +40,7 @@ class HashMap
 						    HashMap		                    (const HashMap<K, V> &other);
 						    ~HashMap		                (void);
 
-		HashMap<K, V>*		operator=	                    (const HashMap<K, V> &other);
+		HashMap<K, V>&		operator=	                    (const HashMap<K, V> &other);
         V&                  operator[]                      (const K &key);
 
         void                insert                          (const K &key, const V &value);

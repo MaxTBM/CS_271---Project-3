@@ -47,13 +47,13 @@ Return: None
 template <class K>
 Hash<K>::~Hash()
 {
+
 }
 
 /*===========================================================================
-Overloading the = operator to assign a binary search tree node, functions
-similar to the copy constructor
-Parameters: A binary search tree node with value of type T
-Return: A copied binary search tree node with value of type T
+Overloading the = operator, functions similar to the copy constructor
+Parameters: A hash with value of type T
+Return: A hash with value of type T
 ===========================================================================*/
 template <class K>
 Hash<K> &Hash<K>::operator=(const Hash<K> &other)
@@ -95,3 +95,4 @@ long Hash<K>::getHash(K key)
 
     return floor(slots * ((k * A) - floor(k * A)));
 }
+

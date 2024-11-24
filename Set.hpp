@@ -19,14 +19,14 @@ template <class T>
 class Set
 {
     private:
-    
+        HashMap<T, bool>        map;
 
     public:
 						        Set		                (long size = 20);
 						        Set		                (const Set<T> &other);
 						        ~Set		            (void);
                                 
-		Set<T>*                 operator=	            (const Set<T> &other);
+		Set<T>&                 operator=	            (const Set<T> &other);
 
         void                    insert                  (const T &value);
         void                    remove                  (const T &value);

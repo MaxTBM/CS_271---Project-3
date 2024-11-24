@@ -59,7 +59,7 @@ Parameters: A hashmap of keys type K and values type T
 Return: A copied hashmap of keys type K and values type T
 ===========================================================================*/
 template <class K, class V>
-HashMap<K, V>* HashMap<K, V>::operator=(const HashMap<K, V> &other)
+HashMap<K, V>& HashMap<K, V>::operator=(const HashMap<K, V> &other)
 {
     if (this != &other)
     {

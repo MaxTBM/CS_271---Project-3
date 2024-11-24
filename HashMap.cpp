@@ -87,7 +87,8 @@ V& HashMap<K, V>::operator[](const K &key)
         }
     }
 
-    // Check if the key is a string
+    // Here the key isn't in the map
+    // Check if the key is a string and throw exception
     if (is_same<K, string>::value)
     {
         throw KeyNotFoundException(key);

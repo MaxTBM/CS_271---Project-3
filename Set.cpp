@@ -104,9 +104,7 @@ void Set<T>::remove(const T &value)
     }
     else
     {
-        ostringstream oss;
-        oss << value;
-        throw KeyNotFoundException(oss.str());
+        throw KeyNotFoundException(value);
     }
 }
 

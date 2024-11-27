@@ -1,16 +1,17 @@
 #include <iostream>
 #include <string>
-#include "HashMap.hpp"
+#include "HashMap.cpp"
 #include "customexceptions.hpp"
 
 using namespace std;
 
-int main1() {
-    
-}
-
 int main()
-{
+{   
     HashMap<int, int> map;
-    map.insert(1,1);
+    map.insert(1, 122);
+    try {
+        cout << map[99];
+    } catch (const KeyNotFoundException& e) {
+        cout << e.what() << endl;
+    }
 };

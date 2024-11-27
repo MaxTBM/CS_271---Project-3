@@ -89,8 +89,8 @@ long Hash<K>::getHash(K key)
     }
 
     // Add ASCII values of characters in the string
-    for (int i = 0; i < key_s.length(); i++) {
-        k += int(key_s[i]);
+        for (char c : key_s) {
+        k = static_cast<int>(c);   
     }
 
     return floor(slots * ((k * A) - floor(k * A)));

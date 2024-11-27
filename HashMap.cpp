@@ -88,7 +88,6 @@ V& HashMap<K, V>::operator[](const K &key)
     }
 
     // Here the key isn't in the map
-    // Check if the key is a string and throw exception
     throw KeyNotFoundException(key);
 };
 
@@ -161,7 +160,7 @@ void HashMap<K, V>::remove(pair<K, V>* remove_pair)
         // Find the key-value pair to remove
         if (&(*i) == remove_pair)
         {
-            map[index].erase(i);  // Remove the element from the vector
+            map[index].erase(i);
             elements--;
             return;
         }

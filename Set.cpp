@@ -20,7 +20,7 @@ Return: None
 template <class T>
 Set<T>::Set(long size)
 {
-    map(size);
+    map = HashMap<T, bool>(size);
 }
 
 /*===========================================================================

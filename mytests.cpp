@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "HashMap.cpp"
+#include "Set.cpp"
 #include "customexceptions.hpp"
 
 using namespace std;
@@ -158,9 +159,111 @@ int HashMap_sanity_check()
     return fail;
 }
 
+int Set_sanity_check()
+{
+    int fail = 0;
+
+    cout << "Testing Set class:" << endl;
+    Set<int> set_int;
+    Set<string> set_string;
+    Set<double> set_double;
+
+    // Test insert and search
+    set_int.insert(10);
+    set_int.insert(20);
+    set_int.insert(30);
+    if (!set_int.search(10) || !set_int.search(20) || !set_int.search(30)) {
+        fail += 1;
+        cout << "Test 1 failed." << endl;
+    } else {
+        cout << "Test 1 passed." << endl;
+    }
+
+    set_string.insert("apple");
+    set_string.insert("banana");
+    set_string.insert("cherry");
+    if (!set_string.search("apple") || !set_string.search("banana") || !set_string.search("cherry")) {
+        fail += 1;
+        cout << "Test 2 failed." << endl;
+    } else {
+        cout << "Test 2 passed." << endl;
+    }
+
+    set_double.insert(1.1);
+    set_double.insert(2.2);
+    set_double.insert(3.3);
+    if (!set_double.search(1.1) || !set_double.search(2.2) || !set_double.search(3.3)) {
+        fail += 1;
+        cout << "Test 3 failed." << endl;
+    } else {
+        cout << "Test 3 passed." << endl;
+    }
+
+    // Test insert duplicate (should not insert duplicate)
+    set_int.insert(10); 
+    set_int.insert(20); 
+    set_int.insert(30); 
+    if (set_int.search(10) != true || set_int.search(20) != true || set_int.search(30) != true) {
+        fail += 1;
+        cout << "Test 4 failed." << endl;
+    } else {
+        cout << "Test 4 passed." << endl;
+    }
+
+    // Test remove and search for removed element
+    set_int.remove(20);
+    if (set_int.search(20) != false) {
+        fail += 1;
+        cout << "Test 5 failed." << endl;
+    } else {
+        cout << "Test 5 passed." << endl;
+    }
+
+    // Test exception for removing a non-existent element
+    try {
+        set_int.remove(9999); // Non-existent value
+        fail += 1; 
+        cout << "Test 6 failed." << endl;
+    } catch (const KeyNotFoundException &e) {
+        cout << "Test 6 passed." << endl;
+    } catch (...) {
+        fail += 1;
+        cout << "Test 6 failed." << endl;
+    }
+
+    // Test copy constructor
+    Set<int> set_copy(set_int);
+    if (!set_copy.search(10) || set_copy.search(20) || !set_copy.search(30)) {
+        fail += 1;
+        cout << "Test 7 failed." << endl;
+    } else {
+        cout << "Test 7 passed." << endl;
+    }
+
+    // Test assignment operator
+    Set<int> set_assign;
+    set_assign = set_int;
+    if (!set_assign.search(10) || set_assign.search(20) || !set_assign.search(30)) {
+        fail += 1;
+        cout << "Test 8 failed." << endl;
+    } else {
+        cout << "Test 8 passed." << endl;
+    }
+
+
+    return fail;
+}
+
 int main()
 {
     int hashmap_test = HashMap_sanity_check();
     cout << "-> "<< hashmap_test << " tests failed." << endl;
     cout << "-> "<< 11 - hashmap_test << " tests passed." << endl;
+    cout << endl;
+
+    int set_test = Set_sanity_check();
+    cout << "-> " << set_test << " tests failed." << endl;
+    cout << "-> " << 8 - set_test << " tests passed." << endl;
+    cout << endl;
 };
+

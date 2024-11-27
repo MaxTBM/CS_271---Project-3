@@ -8,7 +8,7 @@ using namespace std;
 int HashMap_sanity_check()
 {
     int fail = 0;
-
+    
     cout << "Testing HashMap class:" << endl;
     HashMap<int, int> map_int;
     HashMap<string, string> map_string;
@@ -70,6 +70,8 @@ int HashMap_sanity_check()
     try
     {
         int a = map_int[9999];
+        fail += 1;
+        cout << "Test 5 failed." << endl;
     }
     catch (const KeyNotFoundException &e)
     {
@@ -143,6 +145,8 @@ int HashMap_sanity_check()
     pair<int, int>* to_remove_2_ptr = &to_remove_2;
     try {
         map_int.remove(to_remove_2_ptr);
+        fail += 1;
+        cout << "Test 11 failed." << endl;
     } catch (const KeyNotFoundException &e) {
         cout << "Test 11 passed." << endl;
     } catch (...) {

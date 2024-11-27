@@ -167,7 +167,7 @@ void HashMap<K, V>::remove(pair<K, V>* remove_pair)
     }
 
     // Here the key isn't in the map
-    throw KeyNotFoundException(remove_pair);
+    throw KeyNotFoundException(remove_pair -> first);
 }
 
 /*===========================================================================

@@ -4,6 +4,7 @@
         "xtr1common": "cpp",
         "xstring": "cpp",
         "iosfwd": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "iostream": "cpp"
     }
 }

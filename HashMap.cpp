@@ -88,7 +88,7 @@ V& HashMap<K, V>::operator[](const K &key)
     }
 
     // Here the key isn't in the map
-    throw KeyNotFoundException(key);
+    throw key_not_found_exception(key);
 };
 
 /*===========================================================================
@@ -167,7 +167,7 @@ void HashMap<K, V>::remove(pair<K, V>* remove_pair)
     }
 
     // Here the key isn't in the map
-    throw KeyNotFoundException(remove_pair -> first);
+    throw key_not_found_exception(remove_pair -> first);
 }
 
 /*===========================================================================

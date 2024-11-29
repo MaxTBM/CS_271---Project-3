@@ -74,7 +74,7 @@ int HashMap_sanity_check()
         fail += 1;
         cout << "Test 5 failed." << endl;
     }
-    catch (const KeyNotFoundException &e)
+    catch (const key_not_found_exception &e)
     {
         cout << "Test 5 passed." << endl;
     }
@@ -148,7 +148,7 @@ int HashMap_sanity_check()
         map_int.remove(to_remove_2_ptr);
         fail += 1;
         cout << "Test 11 failed." << endl;
-    } catch (const KeyNotFoundException &e) {
+    } catch (const key_not_found_exception &e) {
         cout << "Test 11 passed." << endl;
     } catch (...) {
         fail += 1;
@@ -224,7 +224,7 @@ int Set_sanity_check()
         set_int.remove(9999); // Non-existent value
         fail += 1; 
         cout << "Test 6 failed." << endl;
-    } catch (const KeyNotFoundException &e) {
+    } catch (const key_not_found_exception &e) {
         cout << "Test 6 passed." << endl;
     } catch (...) {
         fail += 1;

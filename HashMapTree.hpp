@@ -13,6 +13,7 @@ using namespace std;
 #ifndef HASHMAPTREE_HPP
 #define HASHMAPTREE_HPP
 
+#include "RBTree.cpp"
 #include "Hash.cpp"
 
 template <class K, class V> 

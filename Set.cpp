@@ -104,7 +104,7 @@ void Set<T>::remove(const T &value)
     }
     else
     {
-        throw KeyNotFoundException(value);
+        throw key_not_found_exception(value);
     }
 }
 

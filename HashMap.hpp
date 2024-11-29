@@ -24,11 +24,11 @@ class HashMap
     private:
         // Dynamic array of vectors
         vector<pair<K, V>>* map;
+
         // Size of the hash map (number of slots) 
         long                slots;
         // Number of key-value pairs in the map
         long                elements;
-        
         // Hash function instance
         Hash<K>             hash_func;
 

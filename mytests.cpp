@@ -1,7 +1,10 @@
 #include <iostream>
 #include <string>
 #include "HashMap.cpp"
+#include "HashMapTree.cpp"
 #include "Set.cpp"
+#include "RBTree.cpp"
+#include "RBTreeNode.cpp"
 #include "customexceptions.hpp"
 
 using namespace std;
@@ -21,7 +24,7 @@ int HashMap_sanity_check()
     map_int.insert(-12, 31);
     if (map_int[1213] != 10 || map_int[211] != -20 || map_int[-12] != 31)
     {
-        fail += 1;
+        fail++;
         cout << "Test 1 failed." << endl;
     }
     else
@@ -34,7 +37,7 @@ int HashMap_sanity_check()
     map_string.insert("three", "ccccs");
     if (map_string["one"] != "aaaas" || map_string["two"] != "bbbbs" || map_string["three"] != "ccccs")
     {
-        fail += 1;
+        fail++;
         cout << "Test 2 failed." << endl;
     }
     else
@@ -47,7 +50,7 @@ int HashMap_sanity_check()
     map_double.insert(112.11, 43.0);
     if (map_double[1.12] != 652.2 || map_double[-34.1] != -41.1 || map_double[112.11] != 43.0)
     {
-        fail += 1;
+        fail++;
         cout << "Test 3 failed." << endl;
     }
     else
@@ -59,7 +62,7 @@ int HashMap_sanity_check()
     map_int.insert(1213, 1210);
     if (map_int[1213] != 1210)
     {
-        fail += 1;
+        fail++;
         cout << "Test 4 failed." << endl;
     }
     else
@@ -71,7 +74,7 @@ int HashMap_sanity_check()
     try
     {
         int a = map_int[9999];
-        fail += 1;
+        fail++;
         cout << "Test 5 failed." << endl;
     }
     catch (const key_not_found_exception &e)
@@ -80,7 +83,7 @@ int HashMap_sanity_check()
     }
     catch (...)
     {
-        fail += 1;
+        fail++;
         cout << "Test 5 failed." << endl;
     }
 
@@ -88,7 +91,7 @@ int HashMap_sanity_check()
     HashMap<int, int> map_copy(map_int);
     if (map_copy[1213] != 1210 || map_copy[211] != -20 || map_copy[-12] != 31)
     {
-        fail += 1;
+        fail++;
         cout << "Test 6 failed." << endl;
     }
     else
@@ -101,7 +104,7 @@ int HashMap_sanity_check()
     map_assign = map_int;
     if (map_assign[1213] != 1210 || map_assign[211] != -20 || map_assign[-12] != 31)
     {
-        fail += 1;
+        fail++;
         cout << "Test 7 failed." << endl;
     }
     else
@@ -112,7 +115,7 @@ int HashMap_sanity_check()
     // Test search()
     auto result = map_int.search(1213);
     if (result == nullptr || result->second != 1210) {
-        fail += 1;
+        fail++;
         cout << "Test 8 failed." << endl;
     }
     else
@@ -122,7 +125,7 @@ int HashMap_sanity_check()
 
     auto result_2 = map_int.search(9999);
     if (result_2 != nullptr) {
-        fail += 1;
+        fail++;
         cout << "Test 9 failed." << endl;
     }
     else
@@ -134,7 +137,7 @@ int HashMap_sanity_check()
     auto to_remove = map_int.search(1213);
     map_int.remove(to_remove);
     if (map_int.search(1213) != nullptr) {
-        fail += 1;
+        fail++;
         cout << "Test 10 failed." << endl;
     }
     else
@@ -155,6 +158,125 @@ int HashMap_sanity_check()
         cout << "Test 11 failed." << endl;
     }
 
+
+    return fail;
+}
+
+int HashMapTree_sanity_check() {
+    int fail = 0;
+
+    cout << "Testing HashMapTree class:" << endl;
+    HashMapTree<int, int> map_int;
+    HashMapTree<string, string> map_string;
+    HashMapTree<double, double> map_double;
+
+    // Test insert and operator[]
+    map_int.insert(1213, 10);
+    map_int.insert(211, -20);
+    map_int.insert(-12, 31);
+    if (map_int[1213] != 10 || map_int[211] != -20 || map_int[-12] != 31) {
+        fail += 1;
+        cout << "Test 1 failed." << endl;
+    } else {
+        cout << "Test 1 passed." << endl;
+    }
+
+    map_string.insert("one", "aaaas");
+    map_string.insert("two", "bbbbs");
+    map_string.insert("three", "ccccs");
+    if (map_string["one"] != "aaaas" || map_string["two"] != "bbbbs" || map_string["three"] != "ccccs") {
+        fail += 1;
+        cout << "Test 2 failed." << endl;
+    } else {
+        cout << "Test 2 passed." << endl;
+    }
+
+    map_double.insert(1.12, 652.2);
+    map_double.insert(-34.1, -41.1);
+    map_double.insert(112.11, 43.0);
+    if (map_double[1.12] != 652.2 || map_double[-34.1] != -41.1 || map_double[112.11] != 43.0) {
+        fail += 1;
+        cout << "Test 3 failed." << endl;
+    } else {
+        cout << "Test 3 passed." << endl;
+    }
+
+    // Test insert overwrite
+    map_int.insert(1213, 1210);
+    if (map_int[1213] != 1210) {
+        fail += 1;
+        cout << "Test 4 failed." << endl;
+    } else {
+        cout << "Test 4 passed." << endl;
+    }
+
+    // Test operator[] for inserting a new key with default value
+    if (map_int[9999] != int()) { // Should insert with default value
+        fail += 1;
+        cout << "Test 5 failed." << endl;
+    } else {
+        cout << "Test 5 passed." << endl;
+    }
+
+    // Test copy constructor
+    HashMapTree<int, int> map_copy(map_int);
+    if (map_copy[1213] != 1210 || map_copy[211] != -20 || map_copy[-12] != 31) {
+        fail += 1;
+        cout << "Test 6 failed." << endl;
+    } else {
+        cout << "Test 6 passed." << endl;
+    }
+
+    // Test assignment operator
+    HashMapTree<int, int> map_assign;
+    map_assign = map_int;
+    if (map_assign[1213] != 1210 || map_assign[211] != -20 || map_assign[-12] != 31) {
+        fail += 1;
+        cout << "Test 7 failed." << endl;
+    } else {
+        cout << "Test 7 passed." << endl;
+    }
+
+    // Test search()
+    auto result = map_int.search(1213);
+    if (result == nullptr || result->second != 1210) {
+        fail += 1;
+        cout << "Test 8 failed." << endl;
+    } else {
+        cout << "Test 8 passed." << endl;
+    }
+
+    auto result_2 = map_int.search(9999);
+    if (result_2 == nullptr || result_2->second != int()) { // Should return the default-initialized node
+        fail += 1;
+        cout << "Test 9 failed." << endl;
+    } else {
+        cout << "Test 9 passed." << endl;
+    }
+
+    // Test remove
+    auto to_remove = map_int.search(1213);
+    map_int.remove(to_remove);
+    if (map_int.search(1213) != nullptr) {
+        fail += 1;
+        cout << "Test 10 failed." << endl;
+    } else {
+        cout << "Test 10 passed." << endl;
+    }
+
+    // Test remove on non-existent key
+    pair<int, int> to_remove_2(9999, 22222);
+    pair<int, int>* to_remove_2_ptr = &to_remove_2;
+    try {
+        map_int.remove(to_remove_2_ptr);
+        fail += 1;
+        cout << "Test 11 failed." << endl;
+    } catch (const key_not_found_exception& e) {
+        cout << "Test 11 passed." << endl;
+    } catch (...) {
+        fail += 1;
+        cout << "Test 11 failed." << endl;
+    }
 
     return fail;
 }
@@ -261,9 +383,13 @@ int main()
     cout << "-> "<< 11 - hashmap_test << " tests passed." << endl;
     cout << endl;
 
+    int hashmaptree_test = HashMapTree_sanity_check();
+    cout << "-> "<< hashmaptree_test << " tests failed." << endl;
+    cout << "-> "<< 10 - hashmaptree_test << " tests passed." << endl;
+    cout << endl;
+
     int set_test = Set_sanity_check();
     cout << "-> " << set_test << " tests failed." << endl;
     cout << "-> " << 8 - set_test << " tests passed." << endl;
     cout << endl;
 };
-

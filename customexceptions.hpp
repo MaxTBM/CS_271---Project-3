@@ -8,6 +8,7 @@ This file contains the custom exceptions for all of our programs.
 #include <iostream>
 #include <exception>
 #include <string>
+#include <sstream>
 using namespace std;
 
 #ifndef CUSTOMEXCEPTIONS_HPP

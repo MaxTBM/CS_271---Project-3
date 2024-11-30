@@ -196,7 +196,7 @@ void RBTreeNode<T>::printPostOrderTraversal() const
  * @return T: value of the node
  */
 template <class T>
-T RBTreeNode<T>::value() const 
+T& RBTreeNode<T>::value()  
 {
     return val;
 };

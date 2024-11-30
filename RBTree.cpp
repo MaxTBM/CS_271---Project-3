@@ -686,3 +686,4 @@ bool RBTree<T>::is_balanced_helper(RBTreeNode<T> *node, int currentBlackHeight, 
     return is_balanced_helper(node->left, currentBlackHeight, expectedBlackHeight) &&
            is_balanced_helper(node->right, currentBlackHeight, expectedBlackHeight);
 }
+

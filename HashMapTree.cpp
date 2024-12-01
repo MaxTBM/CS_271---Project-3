@@ -10,6 +10,7 @@ This class uses an implementation of RBTree.
 #include <utility>
 #include <string>
 #include <type_traits>
+#include <functional>
 #include "HashMapTree.hpp"
 #include "customexceptions.hpp"
 

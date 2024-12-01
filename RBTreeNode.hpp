@@ -40,7 +40,8 @@ public:
     RBTreeNode<T> *treeMin();
     RBTreeNode<T> *treeMax();
     void printPreOrderTraversal() const;
-    void printInOrderTraversal() const;
+    //void printInOrderTraversal() const;
+    void printInOrderTraversal(std::function<void(const T&)> visit) const ;
     void printPostOrderTraversal() const;
     T& value();
 

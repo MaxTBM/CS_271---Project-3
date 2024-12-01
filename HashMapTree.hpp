@@ -20,7 +20,7 @@ using namespace std;
 template <class K, class V> 
 class HashMapTree
 {
-    private:
+    //private:
         // Dynamic array of red-black trees
         RBTree<pair<K, V>>*     map;
 

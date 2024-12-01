@@ -33,7 +33,7 @@ Return: None
 ===========================================================================*/
 template <class K, class V>
 HashMapTree<K, V>::HashMapTree(const HashMapTree<K, V> &other) {
-    copy(other);
+   copy(other);
 }
 
 /*===========================================================================
@@ -65,25 +65,6 @@ Overloading the [] operator
 Parameters: key of type K
 Return: reference to the value associated with the key (of type V)
 ===========================================================================*/
-// template <class K, class V>
-// V& HashMapTree<K, V>::operator[](const K &key) {
-//     long index = hash_func.getHash(key);
-//     auto node = map[index].search(make_pair(key, V()));  // Search for (key, default value)
-//     // if (node == nullptr) {  // Key not found
-//     //     insert(key, V());  // Insert key with default value
-//     //     node = map[index].search(make_pair(key, V()));  // Search again after insertion
-//     // }
-//     // return node->value().second;  // Return reference to the value
-
-//     if (node != nullptr)
-//         {
-//             return node->value().second;
-//         }
-
-//     // Here the key isn't in the map
-//     throw key_not_found_exception(key);
-// }
-
 template <class K, class V>
 V& HashMapTree<K, V>::operator[](const K &key) {
     long index = hash_func.getHash(key); // Hash the key
@@ -140,7 +121,7 @@ std::pair<K, V>* HashMapTree<K, V>::search(const K &key) {
 
     // Search for the pair (key, default-constructed value)
     RBTreeNode<std::pair<K, V>>* node = map[index].search(make_pair(key, V()));
-
+    
     // If the node is found, return a pointer to the value (pair)
     if (node != nullptr) {
         return &node->value();  
@@ -179,14 +160,24 @@ Return: None
 ===========================================================================*/
 template <class K, class V>
 void HashMapTree<K, V>::copy(const HashMapTree<K, V> &other) {
+    // Copy the new hash table
     slots = other.slots;
     elements = other.elements;
     hash_func = other.hash_func;
 
-    map = new RBTree<pair<K, V>>[slots];
-    for (long i = 0; i < slots; ++i) {
-        map[i] = other.map[i]; // Use the RBTree's assignment operator
-    }
-}
+    map = new RBTree<pair<K, V>>[slots];  // Allocate new memory for the hash table
 
+    for (long i = 0; i < slots; ++i) {
+        cout << "Starting traversal and copying of other.map[" << i << "]" << endl;
+
+        // Perform in-order traversal and insert each element into map[i]
+        other.map[i].printInOrderTraversal([this, &i](const std::pair<K, V>& entry) {
+            cout << "Copying entry from other.map[" << i << "]: (" << entry.first << ", " << entry.second << ")" << endl;
+            map[i].insert(entry);  // Insert the element into the current RBTree
+        });
+
+        cout << "Finished copying RBTree at index " << i << endl;
+    }
+
+}
 

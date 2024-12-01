@@ -153,20 +153,15 @@ void RBTreeNode<T>::printPreOrderTraversal() const
  * @tparam T: templated RBTreeNode data class
  */
 template <class T>
-void RBTreeNode<T>::printInOrderTraversal() const
-{
-    if (left->left != nullptr)
-    {
-        left->printInOrderTraversal();
-    };
-
-    cout << val << " ";
-
-    if (right->right != nullptr)
-    {
-        right->printInOrderTraversal();
-    };
-};
+void RBTreeNode<T>::printInOrderTraversal(std::function<void(const T&)> visit) const {
+        if (left) {
+            left->printInOrderTraversal(visit);
+        }
+        visit(val); // Process the current node's data
+         if (right) {
+            right->printInOrderTraversal(visit);
+        }
+    }
 
 /**
  * @brief Print the subtree rooted at *this in Post Order Traversal

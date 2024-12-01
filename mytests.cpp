@@ -385,7 +385,7 @@ int main()
 
     int hashmaptree_test = HashMapTree_sanity_check();
     cout << "-> "<< hashmaptree_test << " tests failed." << endl;
-    cout << "-> "<< 10 - hashmaptree_test << " tests passed." << endl;
+    cout << "-> "<< 11 - hashmaptree_test << " tests passed." << endl;
     cout << endl;
 
     int set_test = Set_sanity_check();

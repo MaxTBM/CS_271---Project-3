@@ -186,7 +186,7 @@ void RBTree<T>::printPreOrderTraversal() const
  * @tparam T: templated RBTree data class
  */
 template <class T>
-void RBTree<T>::printInOrderTraversal() const
+void RBTree<T>::printInOrderTraversal(std::function<void(const T&)> visit) const 
 {
     if (isEmpty())
     {
@@ -194,7 +194,7 @@ void RBTree<T>::printInOrderTraversal() const
     }
     else
     {
-        root->printInOrderTraversal();
+        root->printInOrderTraversal(visit);
     }
 }
 

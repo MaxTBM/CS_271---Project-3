@@ -51,7 +51,8 @@ public:
     bool is_balanced() const;
 
     void printPreOrderTraversal() const;
-    void printInOrderTraversal() const;
+    // void printInOrderTraversal() const;
+    void printInOrderTraversal(std::function<void(const T&)> visit) const; 
     void printPostOrderTraversal() const;
 
     RBTreeNode<T> *insert(T value);
@@ -72,4 +73,5 @@ bool operator<(const std::pair<T, T>& lhs, const std::pair<T, T>& rhs) {
     // If they are equal, compare the second element
     return lhs.second < rhs.second;
 }
+
 #endif

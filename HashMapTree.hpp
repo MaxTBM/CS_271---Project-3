@@ -1,7 +1,7 @@
 /*===========================================================================
 Hoa Nguyen, Nguyen Nguyen, Amaya Joshi
 18 November 2024
-HashMap.hpp
+HashMapTree.hpp
 This file contains the definitions of a hash map tree class.
 This class uses an implementation of RBTree.
 ===========================================================================*/

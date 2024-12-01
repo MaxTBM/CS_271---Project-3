@@ -1,10 +1,10 @@
-//=========================================================
-// RBTree.hpp
-// Authors : Kien, Trinity, James
-// 11/24/2024
-//
-// This is the header file with definitions of functions for the RBTree class
-//=========================================================
+/*===========================================================================
+Hoa Nguyen, Nguyen Nguyen, Amaya Joshi
+18 November 2024
+RBTree.hpp
+This is the header file with definitions of functions for the RBTree class
+===========================================================================*/
+
 #include <iostream>
 using namespace std;
 
@@ -61,17 +61,19 @@ public:
 
 template <class T>
 bool operator==(const std::pair<T, T>& lhs, const std::pair<T, T>& rhs) {
-    // Compare both elements in the pair
     return lhs.first == rhs.first;
 }
 
 template <class T>
 bool operator<(const std::pair<T, T>& lhs, const std::pair<T, T>& rhs) {
-    // First compare the first element of the pair
     if (lhs.first != rhs.first)
         return lhs.first < rhs.first;
-    // If they are equal, compare the second element
     return lhs.second < rhs.second;
+}
+
+template <class T>
+bool operator!=(const std::pair<T, T>& lhs, const std::pair<T, T>& rhs) {
+    return lhs.first != rhs.first;
 }
 
 #endif

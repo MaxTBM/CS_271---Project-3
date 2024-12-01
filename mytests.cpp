@@ -265,7 +265,7 @@ int HashMapTree_sanity_check() {
     }
 
     // Test remove on non-existent key
-    pair<int, int> to_remove_2(9999, 22222);
+    pair<int, int> to_remove_2(999, 22222);
     pair<int, int>* to_remove_2_ptr = &to_remove_2;
     try {
         map_int.remove(to_remove_2_ptr);

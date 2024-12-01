@@ -1,7 +1,7 @@
 /*===========================================================================
 Hoa Nguyen, Nguyen Nguyen, Amaya Joshi
 18 November 2024
-HashMap.cpp
+HashMapTree.cpp
 This file contains the implementations of a hash map tree class.
 This class uses an implementation of RBTree.
 ===========================================================================*/
@@ -43,7 +43,7 @@ Return: None
 ===========================================================================*/
 template <class K, class V>
 HashMapTree<K, V>::~HashMapTree() {
-    delete[] map; // Free the allocated array of RBTree
+    delete[] map; 
 }
 
 /*===========================================================================
@@ -54,8 +54,8 @@ Return: A copied hashmap of keys type K and values type T
 template <class K, class V>
 HashMapTree<K, V>& HashMapTree<K, V>::operator=(const HashMapTree<K, V> &other) {
     if (this != &other) {
-        delete[] map; // Free the existing map
-        copy(other);  // Copy the data from the other HashMapTree
+        delete[] map; 
+        copy(other);  
     }
     return *this;
 }
@@ -67,7 +67,7 @@ Return: reference to the value associated with the key (of type V)
 ===========================================================================*/
 template <class K, class V>
 V& HashMapTree<K, V>::operator[](const K &key) {
-    long index = hash_func.getHash(key); // Hash the key
+    long index = hash_func.getHash(key); 
     auto node = map[index].search(std::make_pair(key, V())); // Search for the key in the tree
 
     if (node != nullptr) {
@@ -98,13 +98,11 @@ void HashMapTree<K, V>::insert(const K &key, const V &value) {
     RBTreeNode<pair<K, V>> *node = map[index].search(new_pair);
 
     if (node != nullptr) {
-        // Key exists, update the value
         node->value().second = value;
     } else {
         // Key doesn't exist, insert a new pair
-        cout << "Inserting key: " << key << ", value: " << value << endl;
         map[index].insert(new_pair);
-        ++elements; // Update the count of elements in the hash map
+        ++elements; 
     }
 }
 
@@ -127,7 +125,7 @@ std::pair<K, V>* HashMapTree<K, V>::search(const K &key) {
         return &node->value();  
     }
 
-    return nullptr;  // Return nullptr if the key was not found
+    return nullptr;  
 }
 
 /*===========================================================================

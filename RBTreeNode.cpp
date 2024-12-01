@@ -1,21 +1,20 @@
-//==============================================================
-// RBTreeNode.cpp
-// Authors : Kien, Trinity, James
-// 11/24/2024
-//
-// Description:
-// This file contains the implementations of the red-black tree node functions
-//==============================================================
+/*===========================================================================
+Hoa Nguyen, Nguyen Nguyen, Amaya Joshi
+18 November 2024
+RBTreeNode.cpp
+This file contains the implementations of the red-black tree node functions
+===========================================================================*/
 #include <iostream>
 #include "RBTreeNode.hpp"
 
 using namespace std;
 
-/**
- * @brief Construct a new RBTreeNode<T>::RBTreeNode object
- * 
- * @tparam T: templated RBTreeNode data class
- */
+// ============================================================
+// Default constructor for RBTreeNode class. Initializes the node 
+// with a null value, red color, and null pointers for left, right, 
+// and parent pointers.
+// Parameter: templated RBTreeNode data class
+// ============================================================
 template <class T>
 RBTreeNode<T>::RBTreeNode()
 {
@@ -26,12 +25,12 @@ RBTreeNode<T>::RBTreeNode()
     color = BLACK;
 }
 
-/**
- * @brief Construct a new RBTreeNode<T>::RBTreeNode object
- * 
- * @tparam T: templated RBTreeNode data class
- * @param value: value of the node
- */
+// ============================================================
+// Constructor for RBTreeNode class. Initializes the node with 
+// the specified value, color, and null pointers for left, right, 
+// and parent pointers.
+// Parameter: T value - The data value to store in the node.
+// ============================================================
 template <class T>
 RBTreeNode<T>::RBTreeNode(T value)
 {
@@ -42,12 +41,12 @@ RBTreeNode<T>::RBTreeNode(T value)
     color = RED;
 }
 
-/**
- * @brief Construct a new RBTreeNode<T>::RBTreeNode object
- * 
- * @tparam T: templated RBTreeNode data class
- * @param node: value of the node 
- */
+// ============================================================
+// Constructor for RBTreeNode class. Initializes the node with 
+// the specified value, color, and null pointers for left, right, 
+// and parent pointers.
+// Parameter: T node - value of the node
+// ============================================================
 template <class T>
 RBTreeNode<T>::RBTreeNode(const RBTreeNode<T> &node)
 {
@@ -58,21 +57,20 @@ RBTreeNode<T>::RBTreeNode(const RBTreeNode<T> &node)
     color = node.color;
 }
 
-/**
- * @brief Destroy the RBTreeNode<T>::RBTreeNode object
- * 
- * @tparam T: templated RBTreeNode data class
- */
+// ============================================================
+// Destructor for RBTreeNode class. Does not delete any children 
+// as they are deleted by the parent node.
+// Parameter: None.
+// ============================================================
 template <class T>
 RBTreeNode<T>::~RBTreeNode(void){};
 
-/**
- * @brief Assignment operator overload
- * 
- * @tparam T: templated RBTreeNode data class
- * @param node: node to be copied
- * @return RBTreeNode<T>&: the node copied from the parameter
- */
+// ============================================================
+// Assignment operator for RBTreeNode class. Copies the data, color,
+// and recursively copies the left and right children from another node.
+// Parameter: const RBTreeNode<T> &node - The node to copy from.
+// Return: A reference to the current node.
+// ============================================================
 template <class T>
 RBTreeNode<T> &RBTreeNode<T>::operator=(const RBTreeNode<T> &node)
 {
@@ -88,12 +86,13 @@ RBTreeNode<T> &RBTreeNode<T>::operator=(const RBTreeNode<T> &node)
     return *this;
 };
 
-/**
- * @brief Find the tree minimum in the subtree rooted at *this
- * 
- * @tparam T: templated RBTreeNode data class
- * @return RBTreeNode<T>*: pointer to the node with minimum value
- */
+// ============================================================
+// Finds the node with the minimum value in the subtree rooted at 
+// the current node by recursively traversing the left child.
+// Parameter: None.
+// Return: A pointer to the node with the minimum value in the 
+//         subtree rooted at the current node.
+// ============================================================
 template <class T>
 RBTreeNode<T> *RBTreeNode<T>::treeMin()
 {
@@ -107,12 +106,13 @@ RBTreeNode<T> *RBTreeNode<T>::treeMin()
     };
 };
 
-/**
- * @brief Find the tree maximum in the subtree rooted at *this
- * 
- * @tparam T: templated RBTreeNode data class
- * @return RBTreeNode<T>*: pointer to the node with maximum value
- */
+// ============================================================
+// Finds the node with the maximum value in the subtree rooted at 
+// the current node by recursively traversing the right child.
+// Parameter: None.
+// Return: A pointer to the node with the maximum value in the 
+//         subtree rooted at the current node.
+// ============================================================
 template <class T>
 RBTreeNode<T> *RBTreeNode<T>::treeMax()
 {
@@ -126,11 +126,12 @@ RBTreeNode<T> *RBTreeNode<T>::treeMax()
     };
 };
 
-/**
- * @brief Print the subtree rooted at *this in Pre Order Traversal
- * 
- * @tparam T: templated RBTreeNode data class
- */
+// ============================================================
+// Prints the values of the nodes in the subtree rooted at the 
+// current node in pre-order traversal (root, left, right).
+// Parameter: None.
+// Return: None.
+// ============================================================
 template <class T>
 void RBTreeNode<T>::printPreOrderTraversal() const
 {
@@ -147,11 +148,12 @@ void RBTreeNode<T>::printPreOrderTraversal() const
     };
 };
 
-/**
- * @brief Print the subtree rooted at *this in In Order Traversal
- * 
- * @tparam T: templated RBTreeNode data class
- */
+// ============================================================
+// Prints the values of the nodes in the subtree rooted at the 
+// current node in in-order traversal (left, root, right).
+// Parameter: visit - A function that processes each node's data.
+// Return: None.
+// ============================================================
 template <class T>
 void RBTreeNode<T>::printInOrderTraversal(std::function<void(const T&)> visit) const {
         if (left) {
@@ -163,11 +165,12 @@ void RBTreeNode<T>::printInOrderTraversal(std::function<void(const T&)> visit) c
         }
     }
 
-/**
- * @brief Print the subtree rooted at *this in Post Order Traversal
- * 
- * @tparam T: templated RBTreeNode data class
- */
+// ============================================================
+// Prints the values of the nodes in the subtree rooted at the 
+// current node in in-order traversal (left, root, right).
+// Parameter: None.
+// Return: None.
+// ============================================================
 template <class T>
 void RBTreeNode<T>::printPostOrderTraversal() const
 {
@@ -184,12 +187,11 @@ void RBTreeNode<T>::printPostOrderTraversal() const
     cout << val << " ";
 };
 
-/**
- * @brief Get the value of the node
- * 
- * @tparam T: templated RBTreeNode data class
- * @return T: value of the node
- */
+// ============================================================
+// Returns a reference to the value stored in the current node.
+// Parameter: None.
+// Return: A reference to the value stored in the node.
+// ============================================================
 template <class T>
 T& RBTreeNode<T>::value()  
 {

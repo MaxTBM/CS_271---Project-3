@@ -179,7 +179,7 @@ void RBTree<T>::printPreOrderTraversal() const
 // Return: None.
 // ============================================================
 template <class T>
-void RBTree<T>::printInOrderTraversal(std::function<void(const T&)> visit) const 
+void RBTree<T>::printInOrderTraversal(function<void(const T&)> visit) const 
 {
     if (isEmpty())
     {
@@ -633,7 +633,7 @@ bool RBTree<T>::is_balanced() const
 
     if (root->color != BLACK)
     {
-        std::cerr << "Root is not black." << std::endl;
+        cerr << "Root is not black." << endl;
         return false;
     }
 
@@ -669,7 +669,7 @@ bool RBTree<T>::is_balanced_helper(RBTreeNode<T> *node, int currentBlackHeight, 
     {
         if ((node->left && node->left->color == RED) || (node->right && node->right->color == RED))
         {
-            std::cerr << "Consecutive red nodes found at node with data " << node->val << std::endl;
+            cerr << "Consecutive red nodes found at node with data " << node->val << endl;
             return false;
         }
     }

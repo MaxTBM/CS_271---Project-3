@@ -155,7 +155,7 @@ void RBTreeNode<T>::printPreOrderTraversal() const
 // Return: None.
 // ============================================================
 template <class T>
-void RBTreeNode<T>::printInOrderTraversal(std::function<void(const T&)> visit) const {
+void RBTreeNode<T>::printInOrderTraversal(function<void(const T&)> visit) const {
         if (left) {
             left->printInOrderTraversal(visit);
         }

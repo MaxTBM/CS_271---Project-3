@@ -95,25 +95,23 @@ Parameters: key of type K, value of type T
 Return: None
 ===========================================================================*/
 template <class K, class V>
-void HashMapTree<K, V>::insert(const K &key, const V &value)
-{
+void HashMapTree<K, V>::insert(const K &key, const V &value) {
     long index = hash_func.getHash(key);
 
     // Create a pair for insertion
     pair<K, V> new_pair = make_pair(key, value);
 
     // Search for an existing key
-    RBTreeNode<pair<K, V>> *node = map[index].search(new_pair);
+    //RBTreeNode<pair<K, V>> *node = map[index].search(new_pair);
+    pair<K, V>* ptr = search(key);
 
-    if (node != nullptr)
-    {
-        node->value().second = value;
-    }
-    else
-    {
+    if (ptr != nullptr) {
+        //node->value().second = value;
+        ptr->second = value;
+    } else {
         // Key doesn't exist, insert a new pair
         map[index].insert(new_pair);
-        ++elements;
+        ++elements; 
     }
 }
 

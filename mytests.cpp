@@ -372,7 +372,7 @@ int Set_sanity_check()
     return fail;
 }
 
-int main()
+int main1()
 {
     int hashmap_test = HashMap_sanity_check();
     cout << "-> "<< hashmap_test << " tests failed." << endl;
@@ -388,4 +388,21 @@ int main()
     cout << "-> " << set_test << " tests failed." << endl;
     cout << "-> " << 8 - set_test << " tests passed." << endl;
     cout << endl;
+    return 0;
+};
+
+int main()
+{
+    HashMapTree<int, string> map;
+    map.insert(1, "a");
+    map.insert(2, "b");
+    map.insert (1, "c");
+    pair <int, string> *item = map.search(2);
+    map.remove(item);
+    try{
+    cout << map[2];}
+    catch (key_not_found_exception)
+    {};
+    cout << map[1];
+    return 0;
 };

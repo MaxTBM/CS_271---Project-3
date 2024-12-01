@@ -65,23 +65,37 @@ Overloading the [] operator
 Parameters: key of type K
 Return: reference to the value associated with the key (of type V)
 ===========================================================================*/
+// template <class K, class V>
+// V& HashMapTree<K, V>::operator[](const K &key) {
+//     long index = hash_func.getHash(key);
+//     auto node = map[index].search(make_pair(key, V()));  // Search for (key, default value)
+//     // if (node == nullptr) {  // Key not found
+//     //     insert(key, V());  // Insert key with default value
+//     //     node = map[index].search(make_pair(key, V()));  // Search again after insertion
+//     // }
+//     // return node->value().second;  // Return reference to the value
+
+//     if (node != nullptr)
+//         {
+//             return node->value().second;
+//         }
+
+//     // Here the key isn't in the map
+//     throw key_not_found_exception(key);
+// }
+
 template <class K, class V>
 V& HashMapTree<K, V>::operator[](const K &key) {
-    long index = hash_func.getHash(key);
-    auto node = map[index].search(make_pair(key, V()));  // Search for (key, default value)
-    // if (node == nullptr) {  // Key not found
-    //     insert(key, V());  // Insert key with default value
-    //     node = map[index].search(make_pair(key, V()));  // Search again after insertion
-    // }
-    // return node->value().second;  // Return reference to the value
+    long index = hash_func.getHash(key); // Hash the key
+    auto node = map[index].search(std::make_pair(key, V())); // Search for the key in the tree
 
-    if (node != nullptr)
-        {
-            return node->value().second;
-        }
+    if (node != nullptr) {
+        return node->value().second; // Return the value if key is found
+    }
 
-    // Here the key isn't in the map
-    throw key_not_found_exception(key);
+    // If the key does not exist, insert it with a default-constructed value
+    auto newNode = map[index].insert(std::make_pair(key, V()));
+    return newNode->value().second; // Return the reference to the newly created value
 }
 
 /*===========================================================================

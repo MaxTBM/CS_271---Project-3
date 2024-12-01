@@ -61,7 +61,7 @@ public:
 template <class T>
 bool operator==(const std::pair<T, T>& lhs, const std::pair<T, T>& rhs) {
     // Compare both elements in the pair
-    return lhs.first == rhs.first && lhs.second == rhs.second;
+    return lhs.first == rhs.first;
 }
 
 template <class T>

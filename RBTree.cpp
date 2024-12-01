@@ -5,11 +5,7 @@ RBTree.cpp
 This file contains the implementations of the red-black tree functions
 ===========================================================================*/
 
-#include "HashMapTree.hpp"
 #include "RBTree.hpp"
-#include "customexceptions.hpp"
-#include "RBTreeNode.hpp"
-#include <functional>
 
 using namespace std;
 

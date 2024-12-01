@@ -3,10 +3,6 @@
 #include "HashMap.cpp"
 #include "HashMapTree.cpp"
 #include "Set.cpp"
-#include "RBTree.cpp"
-#include "RBTreeNode.cpp"
-#include "customexceptions.hpp"
-
 using namespace std;
 
 int HashMap_sanity_check()

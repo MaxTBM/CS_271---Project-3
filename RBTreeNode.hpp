@@ -5,6 +5,7 @@ RBTreeNode.hpp
 This is the header file with definitions of functions for the RBTreeNode class
 ===========================================================================*/
 #include <iostream>
+#include <functional>
 using namespace std;
 
 #ifndef RBTREENODE_HPP
@@ -39,7 +40,7 @@ public:
     RBTreeNode<T> *treeMin();
     RBTreeNode<T> *treeMax();
     void printPreOrderTraversal() const;
-    void printInOrderTraversal(std::function<void(const T&)> visit) const ;
+    void printInOrderTraversal(function<void(const T&)> visit) const ;
     void printPostOrderTraversal() const;
     T& value();
 

@@ -33,4 +33,6 @@ class Hash
         long            getHash                         (K key);
 };
 
+#include "Hash.cpp"
+
 #endif

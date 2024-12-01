@@ -6,14 +6,13 @@ This is the header file with definitions of functions for the RBTree class
 ===========================================================================*/
 
 #include <iostream>
+#include <utility>
 using namespace std;
 
 #ifndef RBTREE_HPP
 #define RBTREE_HPP
 
-#include "HashMapTree.hpp"
-#include "RBTreeNode.hpp"
-#include <utility>
+#include "RBTreeNode.cpp"
 #include "customexceptions.hpp"
 
 template <class T>
@@ -52,7 +51,7 @@ public:
 
     void printPreOrderTraversal() const;
     // void printInOrderTraversal() const;
-    void printInOrderTraversal(std::function<void(const T&)> visit) const; 
+    void printInOrderTraversal(function<void(const T&)> visit) const; 
     void printPostOrderTraversal() const;
 
     RBTreeNode<T> *insert(T value);
@@ -60,19 +59,19 @@ public:
 };
 
 template <class T>
-bool operator==(const std::pair<T, T>& lhs, const std::pair<T, T>& rhs) {
+bool operator==(const pair<T, T>& lhs, const pair<T, T>& rhs) {
     return lhs.first == rhs.first;
 }
 
 template <class T>
-bool operator<(const std::pair<T, T>& lhs, const std::pair<T, T>& rhs) {
+bool operator<(const pair<T, T>& lhs, const pair<T, T>& rhs) {
     if (lhs.first != rhs.first)
         return lhs.first < rhs.first;
     return lhs.second < rhs.second;
 }
 
 template <class T>
-bool operator!=(const std::pair<T, T>& lhs, const std::pair<T, T>& rhs) {
+bool operator!=(const pair<T, T>& lhs, const pair<T, T>& rhs) {
     return lhs.first != rhs.first;
 }
 

@@ -14,7 +14,7 @@ using namespace std;
 #ifndef HASHMAPTREE_HPP
 #define HASHMAPTREE_HPP
 
-#include "RBTree.hpp"
+#include "RBTree.cpp"
 #include "Hash.hpp"
 
 template <class K, class V> 

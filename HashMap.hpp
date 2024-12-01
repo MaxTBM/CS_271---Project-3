@@ -16,7 +16,7 @@ using namespace std;
 #ifndef HASHMAP_HPP
 #define HASHMAP_HPP
 
-#include "Hash.cpp"
+#include "Hash.hpp"
 
 template <class K, class V> 
 class HashMap

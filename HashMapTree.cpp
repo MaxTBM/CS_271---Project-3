@@ -141,7 +141,7 @@ template <class K, class V>
 void HashMapTree<K, V>::remove(pair<K, V>* remove_pair)
 {
    long index = hash_func.getHash(remove_pair->first); 
-   if (map[index].search(*remove_pair))
+   if (map[index].search(*remove_pair) != nullptr)
    {
        map[index].remove(*remove_pair); 
        elements--;
@@ -168,15 +168,9 @@ void HashMapTree<K, V>::copy(const HashMapTree<K, V> &other) {
     map = new RBTree<pair<K, V>>[slots];  // Allocate new memory for the hash table
 
     for (long i = 0; i < slots; ++i) {
-        cout << "Starting traversal and copying of other.map[" << i << "]" << endl;
-
-        // Perform in-order traversal and insert each element into map[i]
         other.map[i].printInOrderTraversal([this, &i](const std::pair<K, V>& entry) {
-            cout << "Copying entry from other.map[" << i << "]: (" << entry.first << ", " << entry.second << ")" << endl;
             map[i].insert(entry);  // Insert the element into the current RBTree
         });
-
-        cout << "Finished copying RBTree at index " << i << endl;
     }
 
 }

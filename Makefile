@@ -1,24 +1,3 @@
-# all: mytests
-
-# mytests: mytests.o HashMap.o HashMapTree.o Set.o
-# 	g++ -std=c++11 -o mytests HashMap.o HashMapTree.o Set.o mytests.o
-# 	./mytests
-
-# mytests.o: mytests.cpp
-# 	g++ -std=c++11 -c mytests.cpp
-
-# HashMap.o: HashMap.cpp HashMap.hpp
-# 	g++ -std=c++11 -c HashMap.cpp
-
-# HashMapTree.o: HashMapTree.cpp HashMapTree.hpp
-# 	g++ -std=c++11 -c HashMapTree.cpp
-
-# Set.o: Set.cpp Set.hpp
-# 	g++ -std=c++11 -c Set.cpp
-
-# clean:
-# 	rm -f *.o mytests
-
 all: mytests
 
 mytests: mytests.o HashMap.o HashMapTree.o Set.o RBTree.o RBTreeNode.o

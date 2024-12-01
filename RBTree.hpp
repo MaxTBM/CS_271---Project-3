@@ -55,7 +55,21 @@ public:
     void printPostOrderTraversal() const;
 
     RBTreeNode<T> *insert(T value);
-    void remove(T value);
+    void remove(T value);   
 };
 
+template <class T>
+bool operator==(const std::pair<T, T>& lhs, const std::pair<T, T>& rhs) {
+    // Compare both elements in the pair
+    return lhs.first == rhs.first && lhs.second == rhs.second;
+}
+
+template <class T>
+bool operator<(const std::pair<T, T>& lhs, const std::pair<T, T>& rhs) {
+    // First compare the first element of the pair
+    if (lhs.first != rhs.first)
+        return lhs.first < rhs.first;
+    // If they are equal, compare the second element
+    return lhs.second < rhs.second;
+}
 #endif

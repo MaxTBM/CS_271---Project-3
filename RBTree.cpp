@@ -102,23 +102,23 @@ long RBTree<T>::size() const
  * @param value: the value of the node to search for
  * @return RBTreeNode<T>*: pointer to the node with value if successful search, NIL otherwise
  */
-template <class T>
+template <class T> 
 RBTreeNode<T> *RBTree<T>::search(const T &value)
 {
     RBTreeNode<T> *current = root;
-    while (current != NIL)
+    while (current != nullptr)
     {
-        if (value == current->val)
+        if (current->val == value)
         {
             return current;
         }
-        else if (value < current->val)
+        if (current->val < value)
         {
-            current = current->left;
+            current = current->right;
         }
         else
         {
-            current = current->right;
+            current = current->left;
         }
     }
     return nullptr;

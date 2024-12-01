@@ -69,11 +69,19 @@ template <class K, class V>
 V& HashMapTree<K, V>::operator[](const K &key) {
     long index = hash_func.getHash(key);
     auto node = map[index].search(make_pair(key, V()));  // Search for (key, default value)
-    if (node == nullptr) {  // Key not found
-        insert(key, V());  // Insert key with default value
-        node = map[index].search(make_pair(key, V()));  // Search again after insertion
-    }
-    return node->value().second;  // Return reference to the value
+    // if (node == nullptr) {  // Key not found
+    //     insert(key, V());  // Insert key with default value
+    //     node = map[index].search(make_pair(key, V()));  // Search again after insertion
+    // }
+    // return node->value().second;  // Return reference to the value
+
+    if (node != nullptr)
+        {
+            return node->value().second;
+        }
+
+    // Here the key isn't in the map
+    throw key_not_found_exception(key);
 }
 
 /*===========================================================================
@@ -87,21 +95,20 @@ Return: None
 template <class K, class V>
 void HashMapTree<K, V>::insert(const K &key, const V &value) {
     long index = hash_func.getHash(key);
-    RBTree<pair<K, V>> &tree = map[index];
 
     // Create a pair for insertion
     pair<K, V> new_pair = make_pair(key, value);
 
     // Search for an existing key
-    RBTreeNode<pair<K, V>> *node = tree.search(new_pair);
+    RBTreeNode<pair<K, V>> *node = map[index].search(new_pair);
 
-    if (node) {
+    if (node != nullptr) {
         // Key exists, update the value
         node->value().second = value;
     } else {
         // Key doesn't exist, insert a new pair
         cout << "Inserting key: " << key << ", value: " << value << endl;
-        tree.insert(new_pair);
+        map[index].insert(new_pair);
         ++elements; // Update the count of elements in the hash map
     }
 }

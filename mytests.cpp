@@ -1,3 +1,10 @@
+/*===========================================================================
+Hoa Nguyen, Nguyen Nguyen, Amaya Joshi
+18 November 2024
+mytests.cpp
+This file runs various tests on all the created classes
+===========================================================================*/
+
 #include <iostream>
 #include <string>
 #include "HashMap.cpp"

@@ -155,7 +155,7 @@ void HashMapTree<K, V>::remove(pair<K, V> *remove_pair)
     }
     else
     {
-        throw key_not_found_exception("Key not found during removal.");
+        throw key_not_found_exception(remove_pair->first);
     }
 }
 

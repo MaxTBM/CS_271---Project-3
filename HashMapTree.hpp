@@ -36,7 +36,7 @@ class HashMapTree
         void                    copy                            (const HashMapTree<K, V> &other); 
 
     public:
-						        HashMapTree		                (long size = 20); // Assume the map has 20 slots if no input in provided
+						        HashMapTree		                (long size = 1000); // Assume the map has 1000 slots if no input in provided
 						        HashMapTree		                (const HashMapTree<K, V> &other);
 						        ~HashMapTree		            (void);
 

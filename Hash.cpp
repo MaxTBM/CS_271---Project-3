@@ -3,7 +3,7 @@ Hoa Nguyen, Nguyen Nguyen, Amaya Joshi
 18 November 2024
 Hash.hpp
 This file contains the implementations of a hash function class.
-The function is the multiplication-shift method
+The function is the division method
 ===========================================================================*/
 
 #include <iostream>
@@ -12,7 +12,6 @@ The function is the multiplication-shift method
 #include <vector>
 #include <cmath>
 #include <string>
-#include <random>
 #include <limits>
 #include <type_traits>
 #include "Hash.hpp"
@@ -28,10 +27,6 @@ template <class K>
 Hash<K>::Hash(long num_slots)
 {
     slots = num_slots;
-    random_device rd;
-    mt19937_64 gen(rd());
-    uniform_int_distribution<unsigned long long> distr(1, numeric_limits<unsigned long long>::max());
-    a = distr(gen) | 1; // Ensure `a` is odd
 }
 
 /*===========================================================================
@@ -43,7 +38,6 @@ template <class K>
 Hash<K>::Hash(const Hash<K> &other)
 {
     slots = other.slots;
-    a = other.a;
 }
 
 /*===========================================================================
@@ -68,13 +62,12 @@ Hash<K> &Hash<K>::operator=(const Hash<K> &other)
     if (this != &other)
     {
         slots = other.slots;
-        a = other.a;
     }
     return *this;
 }
 
 /*===========================================================================
-Hash function implementation (multiplication method)
+Hash function implementation (division method)
 Parameters: The key to hash
 Return: The hash index for the key of long type
 ===========================================================================*/
@@ -85,7 +78,7 @@ long Hash<K>::getHash(K key)
 
     // Check if the key is a string
     if constexpr (is_same<K, string>::value) {
-        // Convert the string key to a numeric hash by summing the ASCII values of the characters
+        // Convert string key into a numeric value by summing ASCII values
         for (char c : key) {
             k = (k * 31 + static_cast<unsigned long long>(c));
         }
@@ -93,6 +86,6 @@ long Hash<K>::getHash(K key)
         k = static_cast<unsigned long long>(key);
     }
 
-    return ((a * k) >> (w - static_cast<int>(log2(slots)))) % slots;
+    return static_cast<long>(k % slots);
 }
 

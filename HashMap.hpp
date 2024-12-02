@@ -36,7 +36,7 @@ class HashMap
         void                copy                            (const HashMap<K, V> &other);        
 
     public:
-						    HashMap		                    (long size = 1000); // Assume the map has 1000 slots if no input in provided
+						    HashMap		                    (long size = 1000); // Assume the map has 997 slots if no input in provided
 						    HashMap		                    (const HashMap<K, V> &other);
 						    ~HashMap		                (void);
 

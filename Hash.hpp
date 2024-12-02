@@ -21,10 +21,6 @@ template <class K>
 class Hash
 {
     private:
-        // Bit width
-        static constexpr int w = 64; 
-        // Multiplier
-        unsigned long long a;
         // Size of the hash map (number of slots)
         long            slots;
     public:

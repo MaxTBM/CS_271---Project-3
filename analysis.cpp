@@ -361,14 +361,16 @@ void analyze_and_export_to_csv(long n) {
 
 int main()
 {
-    //hash_map_tree_all_run_time();
+    hash_map_all_run_time();
 
-    vector<long> sizes = {100, 1000, 10000, 100000, 1000000};
+    hash_map_tree_all_run_time();
 
-    // Analyze and export slot distribution for each size
-    for (long n : sizes) {
-        analyze_and_export_to_csv(n);
-    }
+    // vector<long> sizes = {100, 1000, 10000, 100000, 1000000};
+
+    // // Analyze and export slot distribution for each size
+    // for (long n : sizes) {
+    //     analyze_and_export_to_csv(n);
+    // }
 
     return 0;
 }

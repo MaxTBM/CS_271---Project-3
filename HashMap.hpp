@@ -46,6 +46,8 @@ class HashMap
         void                insert                          (const K &key, const V &value);
         void                remove                          (pair<K, V>* remove_pair);
         pair<K, V>*         search                          (const K &key);
+
+        vector<long>        elements_per_slot               (void);
 };
 
 #endif

@@ -324,7 +324,31 @@ void hash_map_tree_all_run_time()
     cout << endl;
 }
 
+void asa()
+{
+    vector<long> arr = rand_arr(100); // rand_arr already returns a vector
+    HashMapTree<int, int> map_int;
+
+    // Insert elements into the hash map
+    for (long i = 0; i < 100; i++) {
+        map_int.insert(arr[i], arr[i]);
+    }
+
+    // Get the number of elements in each slot
+    vector<long> slot_sizes = map_int.elements_per_slot();
+
+    for (long i = 0; i < slot_sizes.size(); i++) {
+        cout << "Slot " << i << " contains " << slot_sizes[i] << " elements." << endl;
+    }
+}
+
+
+
+
 int main()
 {
-    hash_map_tree_all_run_time();
+    //hash_map_tree_all_run_time();
+    asa();
+
+    return 0;
 }

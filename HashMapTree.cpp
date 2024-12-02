@@ -183,3 +183,14 @@ void HashMapTree<K, V>::copy(const HashMapTree<K, V> &other)
                                            });
     }
 }
+
+template <class K, class V>
+vector<long> HashMapTree<K, V>::elements_per_slot() {
+    vector<long> arr(slots);
+
+    for (long i = 0; i < slots; i++) {
+        arr[i] = map[i].size();
+    }
+
+    return arr;
+}

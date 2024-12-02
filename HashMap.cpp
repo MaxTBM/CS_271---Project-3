@@ -191,3 +191,13 @@ void HashMap<K, V>::copy(const HashMap<K, V> &other)
     }
 }
 
+template <class K, class V>
+vector<long> HashMap<K, V>::elements_per_slot() {
+    vector<long> arr(slots);
+
+    for (long i = 0; i < slots; i++) {
+        arr[i] = map[i].size();
+    }
+
+    return arr;
+}

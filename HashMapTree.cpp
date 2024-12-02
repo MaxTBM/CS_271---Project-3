@@ -102,11 +102,9 @@ void HashMapTree<K, V>::insert(const K &key, const V &value) {
     pair<K, V> new_pair = make_pair(key, value);
 
     // Search for an existing key
-    //RBTreeNode<pair<K, V>> *node = map[index].search(new_pair);
     pair<K, V>* ptr = search(key);
 
     if (ptr != nullptr) {
-        //node->value().second = value;
         ptr->second = value;
     } else {
         // Key doesn't exist, insert a new pair

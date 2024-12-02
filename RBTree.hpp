@@ -65,9 +65,12 @@ bool operator==(const pair<T, T>& lhs, const pair<T, T>& rhs) {
 
 template <class T>
 bool operator<(const pair<T, T>& lhs, const pair<T, T>& rhs) {
-    if (lhs.first != rhs.first)
-        return lhs.first < rhs.first;
-    return lhs.first < rhs.second;
+    return lhs.first < rhs.first;
+}
+
+template <class T>
+bool operator>(const pair<T, T>& lhs, const pair<T, T>& rhs) {
+    return lhs.first > rhs.first;
 }
 
 template <class T>

@@ -6,6 +6,7 @@
 #include <utility>
 #include <algorithm>
 #include "HashMap.cpp"
+#include "HashMapTree.cpp"
 using namespace std;
 using namespace std::chrono;
 
@@ -146,7 +147,7 @@ Return: None
 ===========================================================================*/
 void hash_map_all_run_time()
 {
-    vector<long> sizes = {100, 1000, 10000, 100000};
+    vector<long> sizes = {100, 1000, 10000, 100000, 1000000};
     vector<long long> run_times;
 
     // Measure insert() runtime for each size
@@ -180,7 +181,150 @@ void hash_map_all_run_time()
     cout << endl;
 }
 
+/*===========================================================================
+hash_map_tree_insert_run_time()
+Calculates the run time of hash map tree insert() based on the input length
+Parameters: length of array
+Return: the run time of hash map tree insert() in microseconds
+===========================================================================*/
+long long hash_map_tree_insert_run_time(long n)
+{
+    // Array length n
+    vector<long> arr = rand_arr(n);
+    HashMapTree<int, int> map_int;
+    auto start = high_resolution_clock::now();
+    for (long i = 0; i < n; i++)
+    {
+        map_int.insert(arr[i], arr[i]);
+    }
+    auto stop = high_resolution_clock::now();
+
+    return duration_cast<microseconds>(stop - start).count();
+};
+
+/*===========================================================================
+hash_map_tree_delete_run_time()
+Calculates the run time of hash map tree remove() based on the input length
+Parameters: length of array
+Return: the run time of hash map tree remove() in microseconds
+===========================================================================*/
+long long hash_map_tree_delete_run_time(long n)
+{
+    vector<long> arr = rand_arr(n);
+    HashMapTree<int, int> map_int;
+
+    // Insert n elements
+    for (long i = 0; i < n; i++)
+    {
+        map_int.insert(arr[i], arr[i]);
+    }
+
+    long num_deletions = n / 10;
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<> prob(0, 1);
+
+    auto start = high_resolution_clock::now();
+    for (long i = 0; i < n && num_deletions > 0; i++)
+    {
+        if (prob(gen) < 0.5)
+        { // 50% chance to delete
+            try
+            {
+                pair<int, int> to_remove(arr[i], arr[i]);
+                pair<int, int> *to_remove_ptr = &to_remove;
+                map_int.remove(to_remove_ptr);
+                num_deletions--;
+            }
+            catch (const key_not_found_exception &e)
+            {
+            }
+            catch (...)
+            {
+            }
+        }
+    }
+    auto stop = high_resolution_clock::now();
+
+    return duration_cast<microseconds>(stop - start).count();
+}
+
+/*===========================================================================
+hash_map_tree_search_run_time()
+Calculates the run time of hash map tree search() based on the input length
+Parameters: length of array
+Return: the run time of hash map tree search() in microseconds
+===========================================================================*/
+long long hash_map_tree_search_run_time(long n)
+{
+    vector<long> arr = rand_arr(n);
+    HashMapTree<int, int> map_int;
+
+    // Insert n elements
+    for (long i = 0; i < n; i++)
+    {
+        map_int.insert(arr[i], arr[i]);
+    }
+
+    long numSearches = n / 10;
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> distri(0, n - 1); // Random indices
+
+    auto start = high_resolution_clock::now();
+    for (long i = 0; i < numSearches; i++)
+    {
+        int key = arr[distri(gen)];
+        map_int.search(key); // Perform search
+    }
+    auto stop = high_resolution_clock::now();
+
+    return duration_cast<microseconds>(stop - start).count();
+}
+
+/*===========================================================================
+hash_map_tree_all_run_time()
+Calls all runtime functions and print all the run times of hash map
+Parameters: None
+Return: None
+===========================================================================*/
+void hash_map_tree_all_run_time()
+{
+    vector<long> sizes = {100, 1000, 10000, 100000, 1000000};
+    vector<long long> run_times;
+
+    // Measure insert() runtime for each size
+    cout << "Insert:" << endl;
+    for (long size : sizes)
+    {
+        long long time = hash_map_tree_insert_run_time(size);
+        run_times.push_back(time);
+        cout << "Runtime for size " << size << ": " << time << " microseconds" << endl;
+    }
+    cout << endl;
+
+    // Measure remove() runtime for each size
+    cout << "Delete:" << endl;
+    for (long size : sizes)
+    {
+        long long time = hash_map_tree_delete_run_time(size);
+        run_times.push_back(time);
+        cout << "Runtime for size " << size << ": " << time << " microseconds" << endl;
+    }
+    cout << endl;
+
+    // Measure search() runtime for each size
+    cout << "Search:" << endl;
+    for (long size : sizes)
+    {
+        long long time = hash_map_tree_search_run_time(size);
+        run_times.push_back(time);
+        cout << "Runtime for size " << size << ": " << time << " microseconds" << endl;
+    }
+    cout << endl;
+}
+
 int main()
 {
-    hash_map_all_run_time();
+    hash_map_tree_all_run_time();
 }

@@ -7,6 +7,7 @@ This file contains the definitions of a hash function class.
 
 #include <iostream>
 #include <utility>
+#include <cmath>
 #include <vector>
 
 using namespace std;
@@ -20,8 +21,11 @@ template <class K>
 class Hash
 {
     private:
-        // Size of the hash map (number of slots) 
-        const double    A = 0.69;
+        // Bit width
+        static constexpr int w = 64; 
+        // Multiplier
+        unsigned long long a;
+        // Size of the hash map (number of slots)
         long            slots;
     public:
         			    Hash		                    (long num_slots = 20);

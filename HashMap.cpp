@@ -183,6 +183,7 @@ void HashMap<K, V>::copy(const HashMap<K, V> &other)
     elements = other.elements;
     hash_func = Hash<K>(slots);
 
+    hash_func = other.hash_func;
 
     map = new vector<pair<K, V>>[slots];
     for (long i = 0; i < slots; i++)

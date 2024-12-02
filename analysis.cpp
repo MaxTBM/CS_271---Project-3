@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <random>
 #include <chrono>
@@ -10,8 +11,8 @@
 using namespace std;
 using namespace std::chrono;
 
-const int max_val = 100000;
-const int min_val = -100000;
+const int max_val = INT_MAX;
+const int min_val = INT_MIN;
 
 /*===========================================================================
 rand_arr()
@@ -324,31 +325,50 @@ void hash_map_tree_all_run_time()
     cout << endl;
 }
 
-void asa()
-{
-    vector<long> arr = rand_arr(100); // rand_arr already returns a vector
-    HashMapTree<int, int> map_int;
+// Function to analyze slot distribution and write to a new CSV file
+void analyze_and_export_to_csv(long n) {
+    // Generate random data
+    vector<long> data = rand_arr(n);
+    HashMap<int, int> map; // Create a HashMap instance
 
-    // Insert elements into the hash map
-    for (long i = 0; i < 100; i++) {
-        map_int.insert(arr[i], arr[i]);
+    // Insert all elements into the HashMap
+    for (long val : data) {
+        map.insert(val, val);
     }
 
-    // Get the number of elements in each slot
-    vector<long> slot_sizes = map_int.elements_per_slot();
+    // Get the number of elements per slot
+    vector<long> slot_sizes = map.elements_per_slot();
 
+    // Generate a filename based on dataset size
+    string filename = "hashmap_slot_distribution_" + to_string(n) + ".csv";
+
+    // Write data to the CSV file
+    ofstream csv_file(filename);
+    if (!csv_file.is_open()) {
+        cerr << "Failed to create file: " << filename << endl;
+        return;
+    }
+
+    csv_file << "Slot,Count\n"; // Header row
     for (long i = 0; i < slot_sizes.size(); i++) {
-        cout << "Slot " << i << " contains " << slot_sizes[i] << " elements." << endl;
+        csv_file << i << "," << slot_sizes[i] << "\n";
     }
+    csv_file.close();
+
+    cout << "Data for n = " << n << " written to " << filename << endl;
 }
-
-
 
 
 int main()
 {
     //hash_map_tree_all_run_time();
-    asa();
+
+    vector<long> sizes = {100, 1000, 10000, 100000, 1000000};
+
+    // Analyze and export slot distribution for each size
+    for (long n : sizes) {
+        analyze_and_export_to_csv(n);
+    }
 
     return 0;
 }

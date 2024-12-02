@@ -3,7 +3,7 @@ Hoa Nguyen, Nguyen Nguyen, Amaya Joshi
 18 November 2024
 Hash.hpp
 This file contains the implementations of a hash function class.
-The function is the multiplication method
+The function is the multiplication-shift method
 ===========================================================================*/
 
 #include <iostream>
@@ -12,6 +12,8 @@ The function is the multiplication method
 #include <vector>
 #include <cmath>
 #include <string>
+#include <random>
+#include <limits>
 #include <type_traits>
 #include "Hash.hpp"
 
@@ -26,6 +28,10 @@ template <class K>
 Hash<K>::Hash(long num_slots)
 {
     slots = num_slots;
+    random_device rd;
+    mt19937_64 gen(rd());
+    uniform_int_distribution<unsigned long long> distr(1, numeric_limits<unsigned long long>::max());
+    a = distr(gen) | 1; // Ensure `a` is odd
 }
 
 /*===========================================================================
@@ -37,6 +43,7 @@ template <class K>
 Hash<K>::Hash(const Hash<K> &other)
 {
     slots = other.slots;
+    a = other.a;
 }
 
 /*===========================================================================
@@ -61,6 +68,7 @@ Hash<K> &Hash<K>::operator=(const Hash<K> &other)
     if (this != &other)
     {
         slots = other.slots;
+        a = other.a;
     }
     return *this;
 }
@@ -73,26 +81,18 @@ Return: The hash index for the key of long type
 template <class K>
 long Hash<K>::getHash(K key)
 {
-    long k = 0;
-    string key_s;
+    unsigned long long k = 0;
 
     // Check if the key is a string
-    if (is_same<K, string>::value)
-    {
-        key_s = key;
-    }
-    else
-    {
-        ostringstream oss;
-        oss << key;
-        key_s = oss.str();
+    if constexpr (is_same<K, string>::value) {
+        // Convert the string key to a numeric hash by summing the ASCII values of the characters
+        for (char c : key) {
+            k = (k * 31 + static_cast<unsigned long long>(c));
+        }
+    } else {
+        k = static_cast<unsigned long long>(key);
     }
 
-    // Add ASCII values of characters in the string
-        for (char c : key_s) {
-        k = static_cast<int>(c);   
-    }
-
-    return floor(slots * ((k * A) - floor(k * A)));
+    return ((a * k) >> (w - static_cast<int>(log2(slots)))) % slots;
 }
 
